@@ -55,7 +55,12 @@ async function handleChatData(chatData, senderTab) {
   try {
     // Process chat data
     const mappedData = await processChatData(chatData);
-    console.log("Mapped Data:", mappedData);
+    console.log("Mapped Data (Before Sending to content2.js):", mappedData);
+    if (Object.keys(mappedData).length === 0) {
+      console.warn("❌ No mapped data found! Retrying...");
+      return;
+    }
+   
 
     // Update URL and inject second content script
     const updatedUrl = senderTab.url.split("?filter=unread")[0];
@@ -68,7 +73,6 @@ async function handleChatData(chatData, senderTab) {
 
         try {
           // Get the active tab
-
           const tabs = await chrome.tabs.query({active: true, currentWindow: true});
           const activeTab = tabs[0];
           console.log("Active tab:", activeTab);
@@ -82,7 +86,7 @@ async function handleChatData(chatData, senderTab) {
 
           // Wait for content script to initialize
           await wait(2000);
-
+          
           // Send mapped data to content2.js
           await chrome.tabs.sendMessage(activeTab.id, {
             type: "mapData",

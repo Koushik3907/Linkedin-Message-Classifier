@@ -30,18 +30,18 @@ function applyCategoryStyle(element, category) {
       badge = document.createElement('div');
       badge.className = 'category-badge';
       badge.style.cssText = `
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 12px;
-        font-weight: bold;
-        background-color: rgba(255, 255, 255, 0.9);
-        color: black;
-        z-index: 1000;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      `;
+      position: absolute;
+      right: 20px;  /* Adjust this if overlapping */
+      top: 5px;     /* Moves it a bit higher */
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      background-color: rgba(255, 255, 255, 0.9);
+      color: black;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    `;
       element.style.position = 'relative';
       element.appendChild(badge);
     }
@@ -106,8 +106,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const mappedData = message.data;
     console.log("Mapped Data received from background script:", mappedData);
 
+    if (Object.keys(mappedData).length === 0) {
+      console.warn("❌ Empty mapped data received! Retrying in 2 seconds...");
+      wait(2000).then(() => processChats(mappedData));
+      return;
+    }
+
     // Process the data with a small delay to ensure DOM is ready
-    wait(2000).then(() => processChats(mappedData));
+    wait(1000).then(() => processChats(mappedData));
   }
 });
 
