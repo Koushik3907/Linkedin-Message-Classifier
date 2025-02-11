@@ -68,6 +68,7 @@ async function handleChatData(chatData, senderTab) {
 
         try {
           // Get the active tab
+
           const tabs = await chrome.tabs.query({active: true, currentWindow: true});
           const activeTab = tabs[0];
           console.log("Active tab:", activeTab);
