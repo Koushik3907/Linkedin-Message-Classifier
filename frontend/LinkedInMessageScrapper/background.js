@@ -1,6 +1,7 @@
 // background.js (Coordinator)
 // This file coordinates extraction and classification processes.
 // It uses ES modules to import functions from extractionManager.js and classificationManager.js.
+console.log("Background script running.");
 import {
   startExtraction,
   cancelExtraction,
