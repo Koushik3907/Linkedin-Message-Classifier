@@ -37,17 +37,6 @@ An intelligent message classification system that:
 
 ---
 
-## 🧠 Technical Specifications
-| Component | Technology |
-|------------|-------------|
-| Operating System | Windows 10 |
-| Backend Framework | Django |
-| Frontend | HTML, CSS, JavaScript |
-| Database | SQLite3 |
-| Programming Language | Python |
-| Extension | JavaScript (Browser API) |
-
----
 
 ## 🔬 Machine Learning Overview
 - **Algorithm Used:** Text Classification (e.g., Naïve Bayes / Logistic Regression)  
